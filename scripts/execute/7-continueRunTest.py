@@ -27,7 +27,7 @@ ICTDROID_CMD = [
     '-it', s_it, # Start testcase
     # '-is', s_is, # Start strategy
 ]
-if config.SCOPE_CFG_PATH is not None:
+if config.DEVICE_SERIAL is not None:
     ICTDROID_CMD.extend(['-d', str(config.DEVICE_SERIAL)])
 
 if not os.path.exists(config.JAVA_PATH):
@@ -47,10 +47,12 @@ if not os.path.exists(config.TEST_BRIDGE_PATH):
     exit(0)
 
 # Install test bridge
-install_cmd = [
-    config.ADB_PATH,
+install_cmd = [config.ADB_PATH, ]
+if config.DEVICE_SERIAL is not None:
+    install_cmd.extend(['-s', str(config.DEVICE_SERIAL)])
+install_cmd.extend([
     'install', '-g', '-t', config.TEST_BRIDGE_PATH,
-]
+])
 proc = subprocess.run(install_cmd, stdout=sys.stdout, stderr=sys.stderr)
 if proc.returncode != 0:
     print("Failed to install test-bridge.apk!")

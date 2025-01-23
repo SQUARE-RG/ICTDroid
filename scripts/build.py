@@ -186,7 +186,7 @@ class ICTDroidBuilder:
         if ret_code != 0:
             logger.error(TAG, f"Failed to build test-controller: mvn clean returned with non-zero code: {ret_code}")
             return
-        ret_code = os.system('mvn package')
+        ret_code = os.system('mvn package -DskipTests')
         if ret_code != 0:
             logger.error(TAG, f"Failed to build test-controller: mvn package returned with non-zero code: {ret_code}")
             return

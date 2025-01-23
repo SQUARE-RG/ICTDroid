@@ -174,8 +174,7 @@ public class CompStateMonitor {
             } else {
                 log.warn("Unrecognized component name format of mCurrentFocus: {}", currFocusCompName);
                 if ("DeprecatedTargetSdkVersionDialog".equals(currFocusCompName)) {
-                    adb.shellSync("input keyevent 66");
-                    adb.shellSync("input keyevent 66");
+                    adb.shellSync("input keyevent KEYCODE_ESCAPE");
                 }
             }
         }
